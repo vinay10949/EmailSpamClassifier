@@ -1,0 +1,662 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.totalkyc.com'
+    description: ''
+    variables: {}
+  - url: 'https://testapi.karza.in'
+    description: ''
+    variables: {}
+  - url: 'https://app.karza.in'
+    description: ''
+    variables: {}
+  - url: 'https://localhost:8081'
+    description: ''
+    variables: {}
+info:
+  version: 4f7392a7-47bb-41a6-8d17-a0e753a71ac6
+  title: Karza
+  description: ''
+  termsOfService: ''
+  contact: {}
+  license:
+    name: ''
+paths:
+  /api/prod/login:
+    post:
+      summary: Karza Login
+      operationId: KarzaLogin
+      parameters:
+        - $ref: '#/components/parameters/User-Agent'
+        - $ref: '#/components/parameters/Accept'
+        - $ref: '#/components/parameters/Accept-Language'
+        - $ref: '#/components/parameters/Referer'
+        - $ref: '#/components/parameters/x-product'
+        - $ref: '#/components/parameters/Content-type'
+        - $ref: '#/components/parameters/Origin'
+        - $ref: '#/components/parameters/Connection'
+        - $ref: '#/components/parameters/Cookie'
+        - $ref: '#/components/parameters/Sec-Fetch-Dest'
+        - $ref: '#/components/parameters/Sec-Fetch-Mode'
+        - $ref: '#/components/parameters/Sec-Fetch-Site'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              example:
+                username: supermoney_u1
+                password: Karza@1234
+            example: '{"username":"supermoney_u1","password":"Karza@1234"}'
+  /v3/get-jwt:
+    post:
+      summary: Generate Session Token
+      operationId: GenerateSessionToken
+      parameters:
+        - $ref: '#/components/parameters/x-karza-key'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              example:
+                productId:
+                  - video_kyc
+            example: |-
+              {
+                "productId": [
+                  "video_kyc"
+                ]
+              }
+  /test/videokyc/api/generate-usertoken/21eb7ec6f4e911eb9d621214f83e4af7:
+    get:
+      summary: Generate User Token
+      operationId: GenerateUserToken
+      parameters:
+        - $ref: '#/components/parameters/karzatoken'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+  /test/videokyc/api/customers:
+    post:
+      summary: Add New Customer
+      operationId: AddNewCustomer
+      parameters:
+        - name: karzatoken
+          in: header
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZXF1ZXN0X2lkIjoiZDlkNDljNzItN2FjMS00OTQ0LTg1NzQtZGUwNmU1OGZjNGY2IiwidXNlcl9pZCI6NTMwNzMyLCJzY29wZSI6WyJ2aWRlb19reWMiXSwiZW52IjoidGVzdCIsImNsaWVudF9pZCI6IlN1cGVyTW9uZXlfZDhsNnBIIiwic3RhZ2UiOiJ0ZXN0IiwidXNlcl90eXBlIjoib3BlbiIsImV4cGlyeV90aW1lIjoiMDQtMDgtMjAyMVQwNjoyMzo1OCJ9.U_WemrovLwfLoW5GO21aElHE9nz2eSo0fAeZnXuHCMs
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              example:
+                customerId: Customer43215
+                consent: 'Y'
+                applicantFormData:
+                  applicationType: GENERAL
+                  applicantType: APPLICANT
+                  applicationId: Cust1AppID1
+                  phone: '8128448584'
+                  firstName: UserNew
+                  fatherName: Haribhai
+                  dob: 13/06/1994
+                  email: abc.r@karza.in
+                  gender: male
+                  currentAddress: address
+                  permanentAddress: address
+                  middleName: Haribhai
+                  lastName: Ramanuj
+                  photo: Photo
+                panData:
+                  name: Krunal
+                  fatherName: Dave
+                  dob: 13/06/1994
+                  panNo: xxxxxxxxxxx
+                autoSchedule: false
+            example: |-
+              {
+                "customerId": "Customer43215",
+                "consent": "Y",
+                "applicantFormData": {
+                  "applicationType": "GENERAL",
+                  "applicantType": "APPLICANT",
+                  "applicationId": "Cust1AppID1",
+                  "phone": "8128448584",
+                  "firstName": "UserNew",
+                  "fatherName": "Haribhai",
+                  "dob": "13/06/1994",
+                  "email": "abc.r@karza.in",
+                  "gender": "male",
+                  "currentAddress": "address",
+                  "permanentAddress": "address",
+                  "middleName": "Haribhai",
+                  "lastName": "Ramanuj",
+                  "photo": "Photo"
+                },
+                "panData": {
+                  "name": "Krunal",
+                  "fatherName": "Dave",
+                  "dob": "13/06/1994",
+                  "panNo": "xxxxxxxxxxx"
+                },
+                "autoSchedule": false
+              }
+  /test/videokyc/api/link:
+    get:
+      summary: Generate Web Link
+      operationId: GenerateWebLink
+      parameters:
+        - name: karzatoken
+          in: query
+          required: true
+          style: form
+          schema:
+            type: string
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1MzA3MzIsImVudiI6InRlc3QiLCJleHBpcnlfdGltZSI6IjA0LTA4LTIwMjFUMDY6Mjk6NDYiLCJ1c2VyX3R5cGUiOiJjdXN0b21lciIsImNsaWVudF9pZCI6IlN1cGVyTW9uZXlfZDhsNnBIIiwicmVxdWVzdF9pZCI6ImQ5ZDQ5YzcyLTdhYzEtNDk0NC04NTc0LWRlMDZlNThmYzRmNiIsInNjb3BlIjpbInZpZGVvX2t5YyJdLCJ0cmFuc2FjdGlvbklkIjoiMjFlYjdlYzZmNGU5MTFlYjlkNjIxMjE0ZjgzZTRhZjciLCJzdGFnZSI6InRlc3QifQ.wzNKBNIaDQS_2nNTPPFkWgFDinealxkmdiwpIuY1Nik
+      responses:
+        '200':
+          description: ''
+          headers: {}
+  /recordData:
+    post:
+      summary: CallBackData
+      operationId: CallBackData
+      parameters:
+        - name: x-karza-key
+          in: header
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: MEINr4OB9KlB0lNv
+        - $ref: '#/components/parameters/Content-Type'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              example:
+                requestId: <string>
+                callSuccess: true
+                error: <string>/null
+                failureReason: <string>/null
+                applicationId: <string>
+                customerId: <string>
+                transactionId: <string>
+                agentEmployeeId: <string>/null
+                applicationDetails:
+                  applicationType: <string>
+                  applicantType: <string>
+                  phone: <string>
+                  firstName: <string>
+                  lastName: <string>/null
+                  fatherName: <string>/null
+                  dob: DD/MM/YYYY
+                  email: <string>
+                  gender: <string>
+                  addrCurr: <string>
+                  addrPerm: <string>
+                  photo: <string>/null
+                panMatchResults:
+                  name:
+                    matchScore: 0.24
+                    value: <string>/null
+                    ocrConfidence: 0.24
+                  fathersName:
+                    matchScore: 0.24
+                    value: <string>/null
+                    ocrConfidence: 0.24
+                  dob:
+                    match: true
+                    value: <string>/null
+                    ocrConfidence: 0.24
+                  panID:
+                    match: <boolean> True/False
+                    value: <string>/null
+                    ocrConfidence: 0.24
+                  image:
+                    matchScore: 0.24
+                    value: <string>/null
+                    matchConfidence: 0.24
+                    reviewNeeded: <string>/null
+                  panStatusCheck:
+                    status: <string>/null
+                    duplicate: true
+                    nameMatch: true
+                    dobMatch: true
+                aadhaarMatchResults:
+                  image:
+                    matchScore: 0.9
+                    value: <string>/null
+                    matchConfidence: 0.24
+                    reviewNeeded: <string>/null
+                  name:
+                    matchScore: 0.9
+                    value: <string>/null
+                  permanentAddress:
+                    matchScore: 0.9
+                    value: <string>/null
+                  currentAddress:
+                    matchScore: 0.9
+                    value: <string>/null
+                  dob:
+                    match: true
+                    value: DD/MM/YYYY
+                  gender:
+                    match: true
+                    value: <string>
+                  genDate:
+                    value: '%d/%m/%Y %H:%M:%S.%f'
+                    verified: true
+                  phone:
+                    value: <string>
+                    match: true
+                  email:
+                    value: <string>
+                    match: true
+                  type: XML/EKYC
+                issuesNotified: null
+                customerImage: <string>
+                signatureImage: <string>
+                customerKycVideo: <string>
+                ipAddress: <string>/null
+                location:
+                  city: <string>
+                  state_district: <string>
+                  country: <string>
+                  longitude: 0.9
+                  state: <string>
+                  postcode: <string>
+                  countryCode: <string>
+                  latitude: 0.9
+                  stateDistrict: <string>
+                callStartTime: '%d/%m/%Y %H:%M:%S'
+                callEndTime: '%d/%m/%Y %H:%M:%S'
+                callDuration: 0.9
+                questions:
+                  - question: string
+                    remark: <string>/null
+                    pass: true
+                summary:
+                  - isSuccess: true
+                    key: <string>
+                actionLog:
+                  - time: '%d/%m/%Y %H:%M:%S.%f'
+                    action: <string>
+                    section: <string>
+                    agentName: <string>/null
+                approvedByAgent: <string>/null
+                faceRemark: '[<string>, <string>]/ null'
+                locationRemark: '[<string>, <string>]/ null'
+                aadhaarRemark: '[<string>, <string>]/ null'
+                signRemark: '[<string>, <string>]/ null'
+                panRemark: '[<string>, <string>]/ null'
+                kycReport:
+                  name:
+                    aadharMatchScore: 0.9
+                    panMatchScore: 0.9
+                    overAllScore: 0.9
+                  dob:
+                    panMatch: true
+                    aadhaarMatch: true
+                    overallMatch: true
+                  permanentAddress:
+                    aadharMatchScore: 0.24
+                    overAllScore: 0.24
+                  currentAddress:
+                    aadharMatchScore: 0.24
+                    overAllScore: 0.24
+                  gender:
+                    aadhaarMatch: true
+                    overallMatch: true
+                  fathersName:
+                    panMatchScore: 0.24
+                    overAllScore: 0.24
+                  panNumber:
+                    panMatch: true
+                    overallMatch: true
+                  email:
+                    aadharMatch: true
+                    overallMatch: true
+                  phone:
+                    aadharMatch: true
+                    overallMatch: true
+            example: |-
+              {
+                "requestId": "<string>",
+                "callSuccess": true,
+                "error": "<string>/null",
+                "failureReason": "<string>/null",
+                "applicationId": "<string>",
+                "customerId": "<string>",
+                "transactionId": "<string>",
+                "agentEmployeeId": "<string>/null",
+                "applicationDetails": {
+                  "applicationType": "<string>",
+                  "applicantType": "<string>",
+                  "phone": "<string>",
+                  "firstName": "<string>",
+                  "lastName": "<string>/null",
+                  "fatherName": "<string>/null",
+                  "dob": "DD/MM/YYYY",
+                  "email": "<string>",
+                  "gender": "<string>",
+                  "addrCurr": "<string>",
+                  "addrPerm": "<string>",
+                  "photo": "<string>/null"
+                },
+                "panMatchResults": {
+                  "name": {
+                    "matchScore": 0.24,
+                    "value": "<string>/null",
+                    "ocrConfidence": 0.24
+                  },
+                  "fathersName": {
+                    "matchScore": 0.24,
+                    "value": "<string>/null",
+                    "ocrConfidence": 0.24
+                  },
+                  "dob": {
+                    "match": true,
+                    "value": "<string>/null",
+                    "ocrConfidence": 0.24
+                  },
+                  "panID": {
+                    "match": "<boolean> True/False",
+                    "value": "<string>/null",
+                    "ocrConfidence": 0.24
+                  },
+                  "image": {
+                    "matchScore": 0.24,
+                    "value": "<string>/null",
+                    "matchConfidence": 0.24,
+                    "reviewNeeded": "<string>/null"
+                  },
+                  "panStatusCheck": {
+                    "status": "<string>/null",
+                    "duplicate": true,
+                    "nameMatch": true,
+                    "dobMatch": true
+                  }
+                },
+                "aadhaarMatchResults": {
+                  "image": {
+                    "matchScore": 0.9,
+                    "value": "<string>/null",
+                 "matchConfidence": 0.24,
+                    "reviewNeeded": "<string>/null"
+                  },
+                  "name": {
+                    "matchScore": 0.9,
+                    "value": "<string>/null"
+                  },
+                  "permanentAddress": {
+                    "matchScore": 0.9,
+                    "value": "<string>/null"
+                  },
+                  "currentAddress": {
+                    "matchScore": 0.9,
+                    "value": "<string>/null"
+                  },
+                  "dob": {
+                    "match": true,
+                    "value": "DD/MM/YYYY"
+                  },
+                  "gender": {
+                    "match": true,
+                    "value": "<string>"
+                  },
+                  "genDate": {
+                    "value": "%d/%m/%Y %H:%M:%S.%f",
+                    "verified": true
+                  },
+                  "phone": {
+                    "value": "<string>",
+                    "match": true
+                  },
+                  "email": {
+                    "value": "<string>",
+                    "match": true
+                  },
+                  "type": "XML/EKYC"
+                },
+                "issuesNotified": null,
+                "customerImage": "<string>",
+                "signatureImage": "<string>",
+                "customerKycVideo": "<string>",
+                "ipAddress": "<string>/null",
+                "location": {
+                  "city": "<string>",
+                  "state_district": "<string>",
+                  "country": "<string>",
+                  "longitude": 0.9,
+                  "state": "<string>",
+                  "postcode": "<string>",
+                  "countryCode": "<string>",
+                  "latitude": 0.9,
+                  "stateDistrict": "<string>"
+                },
+                "callStartTime": "%d/%m/%Y %H:%M:%S",
+                "callEndTime": "%d/%m/%Y %H:%M:%S",
+                "callDuration": 0.9,
+                "questions": [
+                  {
+                    "question": "string",
+                    "remark": "<string>/null",
+                    "pass": true
+                  }
+                ],
+                "summary": [
+                  {
+                    "isSuccess": true,
+                    "key": "<string>"
+                  }
+                ],
+                "actionLog": [
+                  {
+                    "time": "%d/%m/%Y %H:%M:%S.%f",
+                    "action": "<string>",
+                    "section": "<string>",
+                    "agentName": "<string>/null"
+                  }
+                ],
+                "approvedByAgent": "<string>/null",
+                "faceRemark": "[<string>, <string>]/ null",
+                "locationRemark": "[<string>, <string>]/ null",
+                "aadhaarRemark": "[<string>, <string>]/ null",
+                "signRemark": "[<string>, <string>]/ null",
+                "panRemark": "[<string>, <string>]/ null",
+                "kycReport": {
+                  "name": {
+                    "aadharMatchScore": 0.9,
+                    "panMatchScore": 0.9,
+                    "overAllScore": 0.9
+                  },
+                  "dob": {
+                    "panMatch": true,
+                    "aadhaarMatch": true,
+                    "overallMatch": true
+                  },
+                  "permanentAddress": {
+                    "aadharMatchScore": 0.24,
+                    "overAllScore": 0.24
+                  },
+                  "currentAddress": {
+                    "aadharMatchScore": 0.24,
+                    "overAllScore": 0.24
+                  },
+                  "gender": {
+                    "aadhaarMatch": true,
+                    "overallMatch": true
+                  },
+                  "fathersName": {
+                    "panMatchScore": 0.24,
+                    "overAllScore": 0.24
+                  },
+                  "panNumber": {
+                    "panMatch": true,
+                    "overallMatch": true
+                  },
+                  "email": {
+                    "aadharMatch": true,
+                    "overallMatch": true
+                  },
+                  "phone": {
+                    "aadharMatch": true,
+                    "overallMatch": true
+                  }
+                }
+              }
+components:
+  parameters:
+    User-Agent:
+      name: User-Agent
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0'
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: 'application/json, text/plain, */*'
+    Accept-Language:
+      name: Accept-Language
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: 'en-US,en;q=0.5'
+    Referer:
+      name: Referer
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: 'https://app.karza.in/vkyc/login'
+    x-product:
+      name: x-product
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: videokyc
+    Content-type:
+      name: Content-type
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: application/json
+    Origin:
+      name: Origin
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: 'https://app.karza.in'
+    Connection:
+      name: Connection
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: keep-alive
+    Cookie:
+      name: Cookie
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: _ga=GA1.2.970318156.1627887049; _gid=GA1.2.1353084182.1627887049; dttk=eyJpc1Rlc3QiOiB0cnVlLCAiYnVzaW5lc3NOYW1lIjogIkdldENsYXJpdHkgRmludGVjaCBzZXJ2aWNlcyBQdnQgTHRkIC0gTWludHdhbGsiLCAiY29udGFjdFBlcnNvbk5hbWUiOiAiTmlraGlsIiwgImlzQWRtaW4iOiBmYWxzZSwgImlzU0EiOiBmYWxzZSwgImIiOiBmYWxzZSwgImQiOiB0cnVlLCAiYWUiOiBmYWxzZSwgImlzVXNhZ2VMb2dzRW5hYmxlZCI6IHRydWUsICJpc0V3YXlCaWxsRW5hYmxlZCI6IGZhbHNlLCAiaXNLc2NhblNlYXJjaEVuYWJsZWQiOiBmYWxzZSwgImlzTmVnYXRpdmVOZXdzRW5hYmxlZCI6IGZhbHNlLCAiaXNMaXRpZ2F0aW9uRW5hYmxlZCI6IGZhbHNlLCAiaXNPa3ljU2RrRW5hYmxlZCI6IGZhbHNlLCAiaGlkZU1vYmlsZUFwaXMiOiBmYWxzZSwgImNsaWVudElkIjogIkdldENsYXJpdHlfVjc0ek5OIiwgInVzZXJJZCI6IDcxMjI1MCwgInNob3dMaXRpZ2F0aW9uQ2xhaW1Ob1RhYiI6IGZhbHNlLCAiZ2loIjogdHJ1ZSwgImdpbnIiOiB0cnVlLCAiZG9jdW1lbnRhdGlvbkVuYWJsZWQiOiBmYWxzZSwgImRhc2hib2FyZEVuYWJsZWQiOiBmYWxzZX0=
+    Sec-Fetch-Dest:
+      name: Sec-Fetch-Dest
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: empty
+    Sec-Fetch-Mode:
+      name: Sec-Fetch-Mode
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: cors
+    Sec-Fetch-Site:
+      name: Sec-Fetch-Site
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: cross-site
+    x-karza-key:
+      name: x-karza-key
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: C7IIRnnxrrwByFuz
+    karzatoken:
+      name: karzatoken
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZXF1ZXN0X2lkIjoiZDlkNDljNzItN2FjMS00OTQ0LTg1NzQtZGUwNmU1OGZjNGY2IiwidXNlcl9pZCI6NTMwNzMyLCJzY29wZSI6WyJ2aWRlb19reWMiXSwiZW52IjoidGVzdCIsImNsaWVudF9pZCI6IlN1cGVyTW9uZXlfZDhsNnBIIiwic3RhZ2UiOiJ0ZXN0IiwidXNlcl90eXBlIjoib3BlbiIsImV4cGlyeV90aW1lIjoiMDQtMDgtMjAyMVQwNjoyMzo1OCJ9.U_WemrovLwfLoW5GO21aElHE9nz2eSo0fAeZnXuHCMs
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: application/json
+security: []
+tags: []
+externalDocs:
+  url: ''
+  description: ''
+warnings: []
